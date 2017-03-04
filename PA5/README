@@ -1,0 +1,59 @@
+PA5_ywang19_ywang22
+
+In this program, we are using two cpp files and one header file to let program read in from several file and then print out the numbers and operators and the result of calculation.
+
+1. In the main.cpp we have the "int main(int argc, char *argv[])" function which will be called by input 
+
+./PA5 test1.txt test2.txt ...
+
+in command line.
+
+First of all, "main" will check whether we have enough number of arguments. If not, a warning of will be print out and the program will be shut down.
+
+If we have enough arguments, then "main" will check whether do we have that file. If not found, then a warning will be print out and will execute next argument.
+
+If the file is found, "main" will invoke the function "calculate" in the same cpp file
+
+2.In the Rational.h file, we have set up a class of rational number, which has numerator and denominator. And some overloaded operator function, which are implemented in Rational.cpp. 
+
+3. The " calculate" get in the readin file as a ifstream. It then invokes a while loop to check every line of the input file. It gets each line of this file into a string "perline". The function initializes a stack s, which will used to store rational number. It also declare three variable "isBoolean", "warn" and "result", to indicate whether this line ended as a boolean operator, whether this line has invalid input, the result of the boolean operator in this line. 
+
+The function then invokes another while loop to seperate "perline" into each "nod" to check what the nod it is. 
+
+It it is an operator, then do the operation from first two elements in the stack s. 
+
+If it is not an operator, then check whether the nod represents a rational number. If nod is a rational number, then put the rational number into the stack. Now, invokes peek() to check whether the nod is a digit. If is a string or something other, then warning. 
+It also checks whether the input has 0 as the denominator; if so, warning.
+
+In the loop, if the operator is +-*/, then the function first check whether we have two or more elements stored in stack. If not, then turn "warn" into true. After calculation, "pop" these two elements and store the new result into the stack.
+
+In the operator /, we have to check whether the denominator rational is 0. If so, warninig.
+
+If the operator is boolean operator, it also check number of elements in the stack. If there are enough number of elements in the stack, then "result" have the value of the operation. "isBoolean" turns into true.
+
+In the next loop, check whether "warn" is true; if it is true, break the loop. If not, check "isBoolean". Since boolean operator can only exist at the end of each line. So it is obviously something wrong if "isBoolean" is true and the next loop is continue.
+
+4.After finish every line calculation, check the number of elements left in the stack.
+If there are more than one elements left, then warning since every number have to be calculated.
+If there are any elements left and the "isBoolean" is true, then warning. Since there should be no elements left in the stack if the last operator is a boolean operator.
+
+Check if warning, the print out warning.
+
+If not warning, check "isBoolean".
+
+If the last one is a boolean operator, then print out the result.
+
+If it is not, then print out the last element as the result of calculation.
+
+5. After finishing calculating this file. close it.
+
+"main will get in to loop to begin calculation of the next file.
+
+6.After finish programming. Shutdown the program.
+
+Credit:
+
+In this program, we talk with Yuxin Wu (ywu8) about the stack structure. 
+We also talk to Yuanda Song (ysong5) about the program's main structure(invoke "calculate", read in each line, seperate into nods, etc)
+
+22/Feb/2017
